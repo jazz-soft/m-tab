@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "rollup h-tab.mjs -f iife -o bundle.js -p @rollup/plugin-node-resolve"
+    "build": "rollup j-tab.mjs -f iife -o bundle.js -p @rollup/plugin-node-resolve"
   },
   "dependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
