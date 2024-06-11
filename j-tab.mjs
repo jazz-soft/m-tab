@@ -7,10 +7,17 @@ TINY(JZZ);
 
 JZZ.synth.Tiny.register('Web Audio');
 var piano = JZZ.input.Kbd({ at: "piano" });
-var out = JZZ().openMidiOut();
-piano.connect(out);
+var midiout = JZZ().openMidiOut();
+var widget = JZZ.Widget();
+piano.connect(midiout);
+piano.connect(widget);
+widget.connect(piano);
 
 let editor = new EditorView({
   extensions: [basicSetup],
   parent: document.body
 })
+
+widget._receive = function(msg) {
+  console.log(msg.toString());
+};
