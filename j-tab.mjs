@@ -40,3 +40,7 @@ widget._receive = function(msg) {
   var anchor = from + note.length;
   editor.dispatch(editor.state.update({changes: {from: from, to: to, insert: note}, selection: {anchor: anchor}}));
 };
+
+function tokenize(s) {
+
+}
