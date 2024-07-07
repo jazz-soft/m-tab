@@ -42,5 +42,22 @@ widget._receive = function(msg) {
 };
 
 function tokenize(s) {
+  var p = new Parser();
+  return p.tok;
+}
 
+function Parser(s) {
+  this.txt = s;
+  this.prev = 0;
+  this.cur = 0;
+  this.tok = [];
+  while (this.cur < this.txt.length) {
+    if (/\s/.test(this.txt[this.cur])) this.cut();
+    this.cur++;
+  }
+  this.cut();
+}
+
+Parser.prototype.cut = function() {
+  if (this.prev != this.cur) this.tok.push({ from: this.prev, to: this.cur, txt: this.txt.substring(this.prev, this.cur) });
 }
