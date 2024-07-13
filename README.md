@@ -1,4 +1,4 @@
-# j-tab
+# m-tab
 coming soon...
 
 ## Build
@@ -6,4 +6,4 @@ coming soon...
 `npm run build`
 
 ## Run
-Open `j-tab.html` in browser
+Open `m-tab.html` in browser
