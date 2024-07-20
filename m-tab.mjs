@@ -1,5 +1,6 @@
 import {EditorView, basicSetup} from "codemirror";
 import JZZ from "jzz";
+import TAB from "jazz-tab";
 import SEL from "jzz-gui-select";
 import KBD from "jzz-input-kbd";
 import TINY from "jzz-synth-tiny";
@@ -42,22 +43,6 @@ widget._receive = function(msg) {
 };
 
 function tokenize(s) {
-  var p = new Parser();
+  var p = new TAB.Parser(s);
   return p.tok;
-}
-
-function Parser(s) {
-  this.txt = s;
-  this.prev = 0;
-  this.cur = 0;
-  this.tok = [];
-  while (this.cur < this.txt.length) {
-    if (/\s/.test(this.txt[this.cur])) this.cut();
-    this.cur++;
-  }
-  this.cut();
-}
-
-Parser.prototype.cut = function() {
-  if (this.prev != this.cur) this.tok.push({ from: this.prev, to: this.cur, txt: this.txt.substring(this.prev, this.cur) });
 }
