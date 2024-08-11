@@ -1,4 +1,5 @@
 import {EditorView, basicSetup} from "codemirror";
+import {StateField} from "@codemirror/state";
 import JZZ from "jzz";
 import TAB from "jazz-tab";
 import SEL from "jzz-gui-select";
@@ -21,14 +22,19 @@ widget.connect(piano);
 midi_in.select();
 midi_out.select();
 
+let parser = StateField.define({
+  create() { return []; },
+  update(value, tr) { return tr.docChanged ? tokenize(tr.state.doc.join('\n')) : value; }
+});
+
 let watcher = EditorView.updateListener.of((update) => {
-  if (update.docChanged) {
-    //console.log('!');
-  }
+  if (!update.docChanged) return;
+  //console.log(update.state.field(parser));
+  if (update.transactions[0].isUserEvent('input.type')) {}
 });
 
 let editor = new EditorView({
-  extensions: [basicSetup, watcher],
+  extensions: [basicSetup, parser, watcher],
   parent: document.body
 })
 
